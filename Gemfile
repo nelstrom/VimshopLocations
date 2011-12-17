@@ -8,6 +8,7 @@ gem 'rails', '3.1.1'
 gem 'sqlite3'
 
 gem 'hominid'
+gem 'geokit'
 
 
 # Gems used only for assets and not required
