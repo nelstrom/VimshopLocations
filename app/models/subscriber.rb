@@ -3,6 +3,8 @@ class Subscriber < ActiveRecord::Base
   validates_presence_of :email
   validates_uniqueness_of :email
 
+  belongs_to :location
+
   def self.fetch_grouped_emails(limit=50)
     emails = fetch_emails
     subs = []

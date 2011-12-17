@@ -6,6 +6,7 @@ class CreateSubscribers < ActiveRecord::Migration
       t.string :country
       t.string :first_name
       t.string :last_name
+      t.references :location
 
       t.timestamps
     end
