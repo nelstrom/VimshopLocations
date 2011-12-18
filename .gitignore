@@ -4,3 +4,5 @@ log/*.log
 tmp/
 .sass-cache/
 config/initializers/mailchimp.rb
+*.sw?
+.rbenv-version

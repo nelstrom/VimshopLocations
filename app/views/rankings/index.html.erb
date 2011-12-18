@@ -1,0 +1,24 @@
+<p>Rankings for <%= pluralize(@location_count, "city")%> in <%= pluralize(@country_count, "country") %>:</p>
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Rank</th>
+      <th scope="col">City</th>
+      <th scope="col">Votes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%- @ranked.each_with_index do |location, i| %>
+      <tr id="country-<%= location.id %>">
+        <td><%= i + 1 %></td>
+        <td><%= location.city %>, <%= location.country %></td>
+        <td><%= location.subscribers_count %></td>
+      </tr>
+    <%- end %>
+  <tfoot>
+    <tr>
+      <td colspan="2" scope="row">Total votes:</td>
+      <td><%= @subscribers_count %></td>
+    </tr>
+  </tfoot>
+</table>
