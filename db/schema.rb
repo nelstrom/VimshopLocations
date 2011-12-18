@@ -11,17 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111216173322) do
-
-  create_table "location_aliases", :force => true do |t|
-    t.string   "city"
-    t.string   "country"
-    t.integer  "location_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "location_aliases", ["city", "country"], :name => "index_location_aliases_on_city_and_country"
+ActiveRecord::Schema.define(:version => 20111216142344) do
 
   create_table "locations", :force => true do |t|
     t.string   "city"
