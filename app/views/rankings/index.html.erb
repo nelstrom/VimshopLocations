@@ -11,7 +11,7 @@
     <%- @ranked.each_with_index do |location, i| %>
       <tr id="country-<%= location.id %>">
         <td><%= i + 1 %></td>
-        <td><%= location.city %></td>
+        <td><%= location.city %>, <%= location.country %></td>
         <td><%= location.subscribers_count %></td>
       </tr>
     <%- end %>
