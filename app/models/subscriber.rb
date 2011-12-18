@@ -5,6 +5,26 @@ class Subscriber < ActiveRecord::Base
 
   belongs_to :location
 
+  def self.import_subscribers
+    fetch_grouped_emails.each do |group|
+      info = fetch_info_for(group)
+      info['data'].each do |u|
+        fields = u['merges']
+        unless Subscriber.find_by_email(u['email']).present?
+          Subscriber.create({
+            :email      => u['email'],
+            :city       => fields['CITY'],
+            :country    => fields['COUNTRY'],
+            :first_name => fields['FNAME'],
+            :last_name  => fields['LNAME']
+          })
+        end
+      end
+    end
+  end
+
+  private
+
   def self.fetch_grouped_emails(limit=50)
     emails = fetch_emails
     subs = []
@@ -22,26 +42,9 @@ class Subscriber < ActiveRecord::Base
     end
   end
 
-  def self.import_subscribers
-    fetch_grouped_emails.each do |group|
-      info = fetch_info_for(group)
-      info['data'].each do |u|
-        fields = u['merges']
-        unless Subscriber.find_by_email(u['email']).present?
-          Subscriber.create({
-            :email => u['email'],
-            :city       => fields['CITY'],
-            :country    => fields['COUNTRY'],
-            :first_name => fields['FNAME'],
-            :last_name  => fields['LNAME']
-          })
-        end
-      end
-    end
-  end
-
   def self.fetch_info_for(emails)
     h = Hominid::API.new(MAILCHIMP_API_KEY)
     h.listMemberInfo(WORKSHOP_LIST_ID, emails)
   end
+
 end
