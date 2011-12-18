@@ -30,4 +30,8 @@ class Location < ActiveRecord::Base
     geo = Graticule.service(:google).new '' # Blank API key
     geo.locate address
   end
+
+  def self.country_count
+    select("DISTINCT(country)").count
+  end
 end
