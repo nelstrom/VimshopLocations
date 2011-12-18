@@ -4,6 +4,8 @@ class Location < ActiveRecord::Base
   validates_presence_of :city, :country
   validates_uniqueness_of :city, scope: :country
 
+  scope :ranked, :order => "subscribers_count DESC,city ASC,country ASC"
+
   def self.find_or_create_normalised_location(city, country)
     if res = geocode("#{city}, #{country}")
       city = res.city || city # Sometimes we have a blank city

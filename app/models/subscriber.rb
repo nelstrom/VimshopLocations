@@ -3,7 +3,7 @@ class Subscriber < ActiveRecord::Base
   validates_presence_of :email
   validates_uniqueness_of :email
 
-  belongs_to :location
+  belongs_to :location, :counter_cache => true
 
   def self.import_subscribers
     fetch_grouped_emails.each do |group|
