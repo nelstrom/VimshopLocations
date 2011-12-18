@@ -11,12 +11,11 @@ class Subscriber < ActiveRecord::Base
       info['data'].each do |u|
         fields = u['merges']
         unless Subscriber.find_by_email(u['email']).present?
-          Subscriber.create({
-            :email      => u['email'],
-            :city       => fields['CITY'],
-            :country    => fields['COUNTRY'],
-            :first_name => fields['FNAME'],
-            :last_name  => fields['LNAME']
+           Subscriber.create({
+            email:       u['email'],
+            first_name:  fields['FNAME'],
+            last_name:   fields['LNAME'],
+            location:    Location.find_or_create_normalised_location(fields["CITY"], fields["COUNTRY"])
           })
         end
       end

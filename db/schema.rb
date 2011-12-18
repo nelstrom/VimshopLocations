@@ -35,8 +35,6 @@ ActiveRecord::Schema.define(:version => 20111216173322) do
 
   create_table "subscribers", :force => true do |t|
     t.string   "email",       :null => false
-    t.string   "city"
-    t.string   "country"
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "location_id"
