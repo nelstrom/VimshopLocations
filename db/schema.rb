@@ -11,19 +11,35 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111216142344) do
+ActiveRecord::Schema.define(:version => 20111216173322) do
+
+  create_table "location_aliases", :force => true do |t|
+    t.string   "city"
+    t.string   "country"
+    t.integer  "location_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "location_aliases", ["city", "country"], :name => "index_location_aliases_on_city_and_country"
 
   create_table "locations", :force => true do |t|
+    t.string   "city"
+    t.string   "state"
+    t.string   "country"
+    t.decimal  "latitude",   :precision => 15, :scale => 10
+    t.decimal  "longitude",  :precision => 15, :scale => 10
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "subscribers", :force => true do |t|
-    t.string   "email",      :null => false
+    t.string   "email",       :null => false
     t.string   "city"
     t.string   "country"
     t.string   "first_name"
     t.string   "last_name"
+    t.integer  "location_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

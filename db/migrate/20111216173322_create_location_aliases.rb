@@ -8,6 +8,6 @@ class CreateLocationAliases < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index [:city, :country]
+    add_index :location_aliases, [:city, :country]
   end
 end
