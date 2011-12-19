@@ -34,16 +34,16 @@ class Subscriber < ActiveRecord::Base
   end
 
   def self.fetch_emails
-    h = Hominid::API.new(MAILCHIMP_API_KEY)
-    members = h.listMembers(WORKSHOP_LIST_ID, 'subscribed', 100.years.ago, 0, 15000)
+    h = Hominid::API.new(ENV['MAILCHIMP_API_KEY'])
+    members = h.listMembers(ENV['WORKSHOP_LIST_ID'], 'subscribed', 100.years.ago, 0, 15000)
     if members.present? && data = members['data']
       data.map { |v| v['email'] }
     end
   end
 
   def self.fetch_info_for(emails)
-    h = Hominid::API.new(MAILCHIMP_API_KEY)
-    h.listMemberInfo(WORKSHOP_LIST_ID, emails)
+    h = Hominid::API.new(ENV['MAILCHIMP_API_KEY'])
+    h.listMemberInfo(ENV['WORKSHOP_LIST_ID'], emails)
   end
 
 end
