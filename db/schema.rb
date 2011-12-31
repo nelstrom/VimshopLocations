@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111218174836) do
+ActiveRecord::Schema.define(:version => 20111231184406) do
 
   create_table "locations", :force => true do |t|
     t.string   "city"
@@ -36,5 +36,12 @@ ActiveRecord::Schema.define(:version => 20111218174836) do
   end
 
   add_index "subscribers", ["email"], :name => "index_subscribers_on_email"
+
+  create_table "unidentified_addresses", :force => true do |t|
+    t.string   "original"
+    t.string   "correction"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
