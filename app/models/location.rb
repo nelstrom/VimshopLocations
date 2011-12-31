@@ -25,10 +25,21 @@ class Location < ActiveRecord::Base
   end
 
   def self.geocode(address)
-    sleep(0.5)
-    Rails.logger.info "Geocoding #{address}"
-    geo = Graticule.service(:google).new '' # Blank API key
-    geo.locate address
+    tries = 0
+    begin
+      tries += 1
+      sleep(0.5)
+      Rails.logger.info "Geocoding #{address}"
+      geo = Graticule.service(:google).new '' # Blank API key
+      geo.locate address
+    rescue
+      puts "Failed to locate #{address}"
+      if tries < 2
+        address.sub!(/, Republic of/i, '')
+        puts "Attempting with: #{address}"
+        retry
+      end
+    end
   end
 
   def self.country_count
