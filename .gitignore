@@ -7,3 +7,4 @@ config/initializers/mailchimp.rb
 *.sw?
 .rbenv-version
 todo.otl
+.envvars
